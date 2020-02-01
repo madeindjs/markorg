@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TextInput, Text } from 'react-native';
+import { TextInput, Text, StyleSheet } from 'react-native';
 
 
 
@@ -42,7 +42,7 @@ export default class MarkdownEditor extends Component {
         return (
             <TextInput
                 multiline={true}
-                style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+                style={styles.editor}
                 onChangeText={text => this.parseMarkdown(text)}
             >
                 {this.state.tags.map((tag, index) => (
@@ -57,3 +57,17 @@ export default class MarkdownEditor extends Component {
         );
     }
 }
+
+
+const styles = StyleSheet.create({
+    editor: {
+        height: 200,
+        borderColor: 'gray',
+        borderWidth: 1,
+        // paddingTop: 50,
+        // flex: 1,
+        // backgroundColor: '#fff',
+        // alignItems: 'center',
+        // justifyContent: 'center',
+    },
+});
