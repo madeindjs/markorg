@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { TextInput, Text, StyleSheet } from 'react-native';
 
+import { Marked, Token } from 'marked-ts';
+
 
 
 interface ITag {
@@ -10,7 +12,7 @@ interface ITag {
 
 interface IState {
     text: string;
-    tags: ITag[];
+    tokens: Token[];
 }
 export default class MarkdownEditor extends Component {
 
@@ -18,25 +20,33 @@ export default class MarkdownEditor extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { text: "", tags: [] };
+        this.state = { text: "", tokens: [] };
     }
 
     parseMarkdown(text: string) {
-        // TODO
 
-        const tags: ITag[] = text.split(' ').map(word => ({
-            content: word,
-            stylesheet: { color: this.getRandomColor() }
-        } as ITag));
+        const { tokens } = Marked.debug(text);
 
-        this.setState({ text, tags });
+        console.log(tokens);
+        // // TODO
+
+        // const tags: ITag[] = text.split(' ').map(word => ({
+        //     content: word,
+        //     stylesheet: { color: this.getRandomColor() }
+        // } as ITag));
+
+        this.setState({ text, tokens });
     }
 
-    private getRandomColor(): string {
-
-        const colors = ['red', 'blue', 'green', 'yellow'];
-        return colors[Math.floor(Math.random() * colors.length)];
+    private getStylesheet(token: Token): StyleSheet {
+        
     }
+
+    // private getRandomColor(): string {
+
+    //     const colors = ['red', 'blue', 'green', 'yellow'];
+    //     return colors[Math.floor(Math.random() * colors.length)];
+    // }
 
     render() {
         return (
@@ -45,12 +55,9 @@ export default class MarkdownEditor extends Component {
                 style={styles.editor}
                 onChangeText={text => this.parseMarkdown(text)}
             >
-                {this.state.tags.map((tag, index) => (
-
-                    <Text key={index} style={tag.stylesheet}>
-
-                        <Text>{tag.content}</Text>
-                        <Text> </Text>
+                {this.state.tokens.map((token, index) => (
+                    <Text key={index}>
+                        <Text>{token.text}</Text>
                     </Text>
                 ))}
             </TextInput>
