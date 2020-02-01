@@ -9,8 +9,8 @@ interface ITag {
 }
 
 interface IState {
-        text: string;
-        tags: ITag[];
+    text: string;
+    tags: ITag[];
 }
 export default class MarkdownEditor extends Component {
 
@@ -26,10 +26,10 @@ export default class MarkdownEditor extends Component {
 
         const tags: ITag[] = text.split(' ').map(word => ({
             content: word,
-            stylesheet: {color: this.getRandomColor()}
+            stylesheet: { color: this.getRandomColor() }
         } as ITag));
 
-        this.setState({text, tags });
+        this.setState({ text, tags });
     }
 
     private getRandomColor(): string {
