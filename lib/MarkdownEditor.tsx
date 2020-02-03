@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { TextInput, Text, StyleSheet } from 'react-native';
 
 import { Marked, Token } from 'marked-ts';
@@ -25,9 +25,13 @@ export default class MarkdownEditor extends Component {
 
     parseMarkdown(text: string) {
 
+        console.log(Marked.debug(text))
+
         const { tokens } = Marked.debug(text);
 
-        console.log(tokens);
+        console.log('-------------------------')
+
+        // console.log(tokens);
         // // TODO
 
         // const tags: ITag[] = text.split(' ').map(word => ({
@@ -38,9 +42,19 @@ export default class MarkdownEditor extends Component {
         this.setState({ text, tokens });
     }
 
-    private getStylesheet(token: Token): StyleSheet {
-        
+    renderToken(token: Token) {
+        switch (token.type) {
+            case 'paragraph':
+                return (
+                    <Fragment>
+                        <Text>{token.text} { `\n` } </Text>
+                    </Fragment>
+                );
+            default:
+                return (<Text>{token.text}</Text>);
+        }
     }
+
 
     // private getRandomColor(): string {
 
@@ -56,9 +70,9 @@ export default class MarkdownEditor extends Component {
                 onChangeText={text => this.parseMarkdown(text)}
             >
                 {this.state.tokens.map((token, index) => (
-                    <Text key={index}>
-                        <Text>{token.text}</Text>
-                    </Text>
+                    <Fragment key={index}>
+                        { this.renderToken(token) }
+                    </Fragment>
                 ))}
             </TextInput>
         );
