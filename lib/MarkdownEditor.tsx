@@ -16,6 +16,7 @@ export default class MarkdownEditor extends Component {
     }
 
     splitLines(text: string) {
+        console.log(text.split('\n'))
         this.setState({
             lines: text.split('\n')
         });
@@ -40,7 +41,7 @@ export default class MarkdownEditor extends Component {
 const styles = StyleSheet.create({
     editor: {
         height: 200,
-        borderColor: 'gray',
+        borderColor: 'red',
         borderWidth: 1,
     },
 });

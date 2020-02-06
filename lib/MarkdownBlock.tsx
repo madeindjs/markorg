@@ -63,6 +63,7 @@ export default class MarkdownBlock extends Component {
     }
 
     render() {
+        console.log(`Parse markdown block "${this.props.content}"`);
         return (
             <Fragment>{this.elements.map(element => (element))}</Fragment>
         );
