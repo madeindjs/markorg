@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { TextInput, StyleSheet } from 'react-native';
+import React, { Component, Fragment } from 'react';
+import { TextInput, StyleSheet, Text } from 'react-native';
 import MarkdownBlock from './MarkdownBlock';
 
 
@@ -30,7 +30,14 @@ export default class MarkdownEditor extends Component {
                 onChangeText={text => this.splitLines(text)}
             >
                 {this.state.lines.map((line, index) => (
-                    <MarkdownBlock key={index} content={line} />
+                    <Fragment key={index}>
+
+                    <MarkdownBlock content={line} />
+                    {index + 1 !== this.state.lines.length &&
+                        <Text>{"\n"}</Text>
+                    }
+                    </Fragment>
+
                 ))}
             </TextInput>
         );
@@ -40,8 +47,8 @@ export default class MarkdownEditor extends Component {
 
 const styles = StyleSheet.create({
     editor: {
-        height: 200,
-        borderColor: 'red',
-        borderWidth: 1,
+        height: '100%',
+        // backgroundColor: 'lightgray',
+        padding: 5
     },
 });
