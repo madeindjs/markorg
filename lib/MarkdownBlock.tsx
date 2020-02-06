@@ -1,9 +1,35 @@
 import React, { Fragment } from 'react';
 import { Text } from 'react-native';
-import Italic from './markdownElements/Italic';
+import { Italic, Strike, Code } from './InlineElements';
 
 interface IProps {
     content: string;
+}
+
+
+const tags = {
+    '*': 'italic',
+    '_': 'italic',
+    '`': 'code',
+    '~': 'strike',
+}
+
+const charsTag = ['*', '_', '`', '~'];
+
+function buildElement(key: number, tag: string, content: string): JSX.Element {
+
+    switch (tags[tag]) {
+        case 'strike':
+            return <Strike key={key} content={content} />;
+        case 'code':
+            return <Code key={key} content={content} />;
+        case 'italic':
+            return <Italic key={key} content={content} />;
+        default:
+            break;
+    }
+
+
 }
 
 function parseContent(content: string): JSX.Element[] {
@@ -19,7 +45,7 @@ function parseContent(content: string): JSX.Element[] {
             const tagContent = content.slice(previousTagIndex, i + 1);
             elements.push(<Text key={i}>{tagContent}</Text>);
 
-        } else if (['*', '_'].includes(char)) {
+        } else if (charsTag.includes(char)) {
             // get a tag
 
             if (openingTag === null) {
@@ -39,7 +65,7 @@ function parseContent(content: string): JSX.Element[] {
                 i++;
                 const tagContent = content.slice(previousTagIndex, i);
                 // console.log(`Get closing tag @${i} = ${tagContent}`)
-                elements.push(<Italic key={i} content={tagContent} />);
+                elements.push(buildElement(i, openingTag, tagContent));
                 previousTagIndex = i;
                 openingTag = null;
 
