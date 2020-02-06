@@ -19,9 +19,11 @@ describe('MarkdownBlock', () => {
 
         expect(editor[0].type).toBe('Text');
         expect(editor[0].children[0]).toBe('Hello ');
+        expect(editor[0].props.style).toBeUndefined();
 
         expect(editor[1].type).toBe('Text');
         expect(editor[1].children[0]).toBe('*boi*');
+        expect(editor[1].props.style).not.toBeUndefined();
 
         expect(editor[2].type).toBe('Text');
         expect(editor[2].children[0]).toBe(' !');
@@ -34,15 +36,19 @@ describe('MarkdownBlock', () => {
 
         expect(editor[0].type).toBe('Text');
         expect(editor[0].children[0]).toBe('*Hello*');
+        expect(editor[0].props.style).not.toBeUndefined();
 
         expect(editor[1].type).toBe('Text');
         expect(editor[1].children[0]).toBe(' ');
+        expect(editor[1].props.style).toBeUndefined();
 
         expect(editor[2].type).toBe('Text');
         expect(editor[2].children[0]).toBe('*boi*');
+        expect(editor[2].props.style).not.toBeUndefined();
 
         expect(editor[3].type).toBe('Text');
         expect(editor[3].children[0]).toBe(' !');
+        expect(editor[3].props.style).toBeUndefined();
     });
 });
 
