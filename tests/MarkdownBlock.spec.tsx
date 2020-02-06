@@ -26,5 +26,23 @@ describe('MarkdownBlock', () => {
         expect(editor[2].type).toBe('Text');
         expect(editor[2].children[0]).toBe(' !');
     });
+
+    test('parse multiples inline markdown test', () => {
+        const md = `*Hello* *boi* !`;
+        const editor = renderer.create(<MarkdownBlock content={md} />).toJSON();
+        expect(editor).toHaveLength(4);
+
+        expect(editor[0].type).toBe('Text');
+        expect(editor[0].children[0]).toBe('*Hello*');
+
+        expect(editor[1].type).toBe('Text');
+        expect(editor[1].children[0]).toBe(' ');
+
+        expect(editor[2].type).toBe('Text');
+        expect(editor[2].children[0]).toBe('*boi*');
+
+        expect(editor[3].type).toBe('Text');
+        expect(editor[3].children[0]).toBe(' !');
+    });
 });
 
