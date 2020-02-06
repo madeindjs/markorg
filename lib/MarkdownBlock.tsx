@@ -33,21 +33,25 @@ export default class MarkdownBlock extends Component {
             if (i + 1 === content.length) {
                 // end of content. insert text
                 const tagContent = content.slice(previousTagIndex, i + 1);
-                this.elements.push(<Text>{tagContent}</Text>);
+                this.elements.push(<Text key={i}>{tagContent}</Text>);
 
             } else if (['*', '_'].includes(char)) {
                 // get a tag
 
                 if (openingTag === null) {
+                    // console.log(`Get opening tag @${i}`)
                     // opening tag
-                    const tagContent = content.slice(previousTagIndex, i + 1);
-                    this.elements.push(<Text>{tagContent}</Text>);
+                    const tagContent = content.slice(previousTagIndex, i);
+                    this.elements.push(<Text key={i}>{tagContent}</Text>);
                     previousTagIndex = i;
+                    openingTag = char;
 
                 } else if (openingTag === char) {
+                    // console.log(`Get opening tag @${i}`)
                     // closing tag
-                    const tagContent = content.slice(previousTagIndex, i + 1);
-                    this.elements.push(<Italic content={tagContent}></Italic>);
+                    i++;
+                    const tagContent = content.slice(previousTagIndex, i);
+                    this.elements.push(<Italic key={i} content={tagContent} />);
                     previousTagIndex = i;
 
                 } else {

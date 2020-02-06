@@ -17,7 +17,7 @@ export default class MarkdownEditor extends Component {
 
     splitLines(text: string) {
         this.setState({
-            lines: text.split('\n');
+            lines: text.split('\n')
         });
     }
 
