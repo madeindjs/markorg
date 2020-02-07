@@ -95,7 +95,7 @@ describe('MarkdownBlock', () => {
         });
     });
 
-    describe('strike', () => {
+    describe.skip('strike', () => {
         test('parse inline markdown test', () => {
             const md = 'Hello ~boi~ !';
             const editor = renderer.create(<MarkdownBlock content={md} />).toJSON();
@@ -116,7 +116,7 @@ describe('MarkdownBlock', () => {
         });
     });
 
-    describe.skip('strong', () => {
+    describe('strong', () => {
         test('parse inline markdown test', () => {
             const md = `Hello **boi** !`;
             const editor = renderer.create(<MarkdownBlock content={md} />).toJSON();
