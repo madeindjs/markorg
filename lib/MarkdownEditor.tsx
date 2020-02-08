@@ -1,6 +1,15 @@
 import React, { Component, Fragment, useState } from 'react';
 import { TextInput, StyleSheet, Text } from 'react-native';
 import MarkdownBlock from './MarkdownBlock';
+import md, { Node, Text as TextNode } from 'markdown-ast'
+
+function parseMarkdown(text: string, callback): Node[] {
+    console.log('---------------------------------------')
+    const ast = md(text);
+    console.log(ast);
+    callback(text);
+    return ast;
+}
 
 export default () => {
     const [content, setContent] = useState("");
@@ -10,7 +19,7 @@ export default () => {
         <TextInput
             multiline={true}
             style={styles.editor}
-            onChangeText={text => setContent(text)}
+            onChangeText={text => parseMarkdown(text, setContent)}
         >
             {lines.map((line, index) => (
                 <Fragment key={index}>

@@ -29,9 +29,16 @@ export const Strong = ({ content }: IProps) => {
     );
 }
 
+export const H1 = ({ content }: IProps) => {
+    return (
+        <Text style={styles.h1}>{content}</Text>
+    );
+}
+
 const styles = StyleSheet.create({
     italic: {
-        color: 'gray'
+        color: 'gray',
+        fontStyle: 'italic'
     },
     strike: {
         fontWeight: 'bold'
@@ -41,5 +48,9 @@ const styles = StyleSheet.create({
     },
     strong: {
         fontWeight: 'bold'
+    },
+    h1: {
+        fontWeight: 'bold',
+        color: 'red'
     },
 });

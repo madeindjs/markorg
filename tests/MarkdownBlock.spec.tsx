@@ -74,6 +74,19 @@ describe('MarkdownBlock', () => {
         });
     });
 
+    describe('title', () => {
+        test('parse inline H1', () => {
+            const md = '# Hello !';
+            const editor = renderer.create(<MarkdownBlock content={md} />).toJSON();
+            // console.log(editor)
+            // expect(editor).toMatchSnapshot();
+
+            expect(editor.type).toBe('Text');
+            expect(editor.children[0]).toBe('# Hello !');
+            expect(editor.props.style).not.toBeUndefined();
+        });
+    });
+
     describe('code', () => {
         test('parse inline markdown test', () => {
             const md = 'Hello `boi` !';
