@@ -2,6 +2,7 @@ import React, { Component, Fragment, useState } from 'react';
 import { TextInput, StyleSheet, Text } from 'react-native';
 import MarkdownBlock from './MarkdownBlock';
 import md, { Node, Text as TextNode } from 'markdown-ast'
+import Section from './Section';
 
 function parseMarkdown(text: string, callback): Node[] {
     console.log('---------------------------------------')
@@ -21,6 +22,7 @@ export default () => {
             style={styles.editor}
             onChangeText={text => parseMarkdown(text, setContent)}
         >
+            <Section />
             {lines.map((line, index) => (
                 <Fragment key={index}>
                     <MarkdownBlock content={line} />
