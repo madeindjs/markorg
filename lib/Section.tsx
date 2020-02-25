@@ -8,15 +8,21 @@ interface IProps {
 
 export default () => {
     const [expand, setExpand] = useState(true);
+    const [level, setLevel] = useState(1);
 
     const toggle = () => {
         setExpand(!expand);
     }
 
+    const incrementLevel = () => {
+        let newLevel = level > 6 ? 1 : level + 1;
+        setLevel(newLevel);
+    }
+
     return (
         <View style={styles.section}>
             {/* <TouchableOpacity onPress={toggle}> */}
-            <Button onPress={toggle} title="#" />
+            <Button onPress={incrementLevel} title={"#".repeat(level) } />
             <View style={{ flex: 1, flexDirection: 'column' }}>
                 <TextInput style={styles.title} multiline={true}>
                     Pretty title
