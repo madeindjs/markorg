@@ -1,7 +1,6 @@
 
 import React, { Fragment, useState } from 'react';
-import { Text, StyleSheet, Button, TouchableOpacity } from 'react-native';
-import { H1 } from './InlineElements';
+import { StyleSheet, Button, TextInput, View } from 'react-native';
 
 interface IProps {
     content: string;
@@ -15,19 +14,38 @@ export default () => {
     }
 
     return (
-        <Fragment>
-            <TouchableOpacity onPress={toggle}>
-                <H1 content="# Hello"/>
-            </TouchableOpacity>
-            {"\n"}
-            <Text style={expand ? styles.hidden : {}}>
-                Fugiat laborum anim anim deserunt tempor ex adipisicing quis laboris nulla. Anim in ut aliqua ex. Irure cupidatat voluptate nisi irure cillum nulla ullamco consequat deserunt non. Incididunt id in id duis. Et est fugiat ea deserunt pariatur reprehenderit culpa eiusmod cupidatat ullamco dolor non elit aute. Qui dolor ullamco aliquip nisi aliquip irure sint laboris ad aliqua ut sunt sunt ad.
-            </Text>
-        </Fragment>
+        <View style={styles.section}>
+            {/* <TouchableOpacity onPress={toggle}> */}
+            <Button onPress={toggle} title="#" />
+            <View style={{ flex: 1, flexDirection: 'column' }}>
+                <TextInput style={styles.title} multiline={true}>
+                    Pretty title
+                </TextInput>
+                {/* </TouchableOpacity> */}
+                <TextInput style={expand ? styles.hidden : {}} multiline={true} >
+                    Fugiat laborum anim anim deserunt tempor ex adipisicing quis laboris nulla. Anim in ut aliqua ex. Irure cupidatat voluptate nisi irure cillum nulla ullamco consequat deserunt non. Incididunt id in id duis. Et est fugiat ea deserunt pariatur reprehenderit culpa eiusmod cupidatat ullamco dolor non elit aute. Qui dolor ullamco aliquip nisi aliquip irure sint laboris ad aliqua ut sunt sunt ad.
+            </TextInput>
+            </View>
+            <Button onPress={toggle} title={expand ? "[+]" : "[-]"} />
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
+    // TODO: apply to button
+    expandButton: {
+        fontFamily: 'monospace'
+    },
+    title: {
+        paddingTop: 10,
+        fontWeight: 'bold',
+        color: 'red'
+    },
+    section: {
+        flex: 1,
+        flexDirection: 'row',
+        //height: 200
+    },
     hidden: {
         width: 0,
         height: 0,
