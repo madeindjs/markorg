@@ -1,5 +1,5 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, Button } from 'react-native';
 import Section from './Section';
 
 // function parseMarkdown(text: string, callback): Node[] {
@@ -11,12 +11,17 @@ import Section from './Section';
 // }
 
 export default () => {
-    // const [content, setContent] = useState("");
+    const [nbSection, setNbSection] = useState(1);
     // const lines = content.split('\n');
+
+    // const sections = [];
+
+    // for (let i; i> )
 
     return (
         <View style={styles.editor}>
-            <Section />
+            {Array(nbSection).fill(undefined).map((e, i) => <Section key={i} />)}
+            <Button title="add section" onPress={() => setNbSection(nbSection + 1)} />
         </View>
     );
 }
@@ -25,6 +30,8 @@ const styles = StyleSheet.create({
     editor: {
         height: '100%',
         // backgroundColor: 'lightgray',
-        padding: 5
+        padding: 5,
+        // flex: 1,
+        // flexDirection: 'column',
     },
 });

@@ -22,7 +22,6 @@ export default () => {
 
     return (
         <View style={styles.section}>
-            {/* <TouchableOpacity onPress={toggle}> */}
             <Button onPress={incrementLevel} title={"#".repeat(level) } />
             <View style={{ flex: 1, flexDirection: 'column' }}>
                 <TextInput style={styles.title} multiline={true}>
