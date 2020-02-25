@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react';
-import { Text } from 'react-native';
+import React, { useState } from 'react';
+import { Text, TextInput } from 'react-native';
 import { Italic, Strike, Code, Strong, H1 } from './InlineElements';
 import md, { Node, Text as TextNode } from 'markdown-ast'
 
@@ -48,11 +48,14 @@ function parseContent(content: string): JSX.Element[] {
 }
 
 
-export default ({ content }: IProps) => {
+export default () => {
+    const [content, setContent] = useState("*Lorem* __Ipsum__ sir dolor amet.");
     const elements = parseContent(content);
 
     return (
-        <Fragment>{elements.map(element => (element))}</Fragment>
+        <TextInput onChangeText={text => setContent(text)} multiline={true}>
+            {elements.map(element => (element))}
+        </TextInput>
     );
 };
 

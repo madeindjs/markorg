@@ -1,6 +1,7 @@
 
 import React, { Fragment, useState } from 'react';
 import { StyleSheet, Button, TextInput, View } from 'react-native';
+import MarkdownBlock from './MarkdownBlock';
 
 interface IProps {
     content: string;
@@ -27,10 +28,9 @@ export default () => {
                 <TextInput style={styles.title} multiline={true}>
                     Pretty title
                 </TextInput>
-                {/* </TouchableOpacity> */}
-                <TextInput style={expand ? styles.hidden : {}} multiline={true} >
-                    Fugiat laborum anim anim deserunt tempor ex adipisicing quis laboris nulla. Anim in ut aliqua ex. Irure cupidatat voluptate nisi irure cillum nulla ullamco consequat deserunt non. Incididunt id in id duis. Et est fugiat ea deserunt pariatur reprehenderit culpa eiusmod cupidatat ullamco dolor non elit aute. Qui dolor ullamco aliquip nisi aliquip irure sint laboris ad aliqua ut sunt sunt ad.
-            </TextInput>
+                <View style={expand ? styles.hidden : {}}>
+                    <MarkdownBlock />
+                </View>
             </View>
             <Button onPress={toggle} title={expand ? "[+]" : "[-]"} />
         </View>
