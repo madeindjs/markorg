@@ -5,7 +5,7 @@ import md, { Node, Text as TextNode } from 'markdown-ast'
 
 
 interface IProps {
-    content: string;
+    content?: string;
 }
 
 function getElements(node: Node, index: number): JSX.Element {
@@ -48,8 +48,8 @@ function parseContent(content: string): JSX.Element[] {
 }
 
 
-export default () => {
-    const [content, setContent] = useState("*Lorem* __Ipsum__ sir dolor amet.");
+export default (props: IProps) => {
+    const [content, setContent] = useState(props.content || "*Lorem* __Ipsum__ sir dolor amet.");
     const elements = parseContent(content);
 
     return (
