@@ -10,8 +10,21 @@ import Section from './Section';
 //     return ast;
 // }
 
+interface ISectionData {
+    level: number;
+    onChange: () => void
+}
+
 export default () => {
-    const [nbSection, setNbSection] = useState(1);
+    const [sections, setSections] = useState<ISectionData[]>([]);
+
+    const addSection = () => {
+        setSections([...sections, {
+            level: 1,
+            onChange: () => {}
+        }]);
+    }
+
     // const lines = content.split('\n');
 
     // const sections = [];
@@ -20,8 +33,8 @@ export default () => {
 
     return (
         <View style={styles.editor}>
-            {Array(nbSection).fill(undefined).map((e, i) => <Section key={i} />)}
-            <Button title="add section" onPress={() => setNbSection(nbSection + 1)} />
+            {sections.map((e, i) => <Section key={i} />)}
+            <Button title="add section" onPress={() => addSection()} />
         </View>
     );
 }

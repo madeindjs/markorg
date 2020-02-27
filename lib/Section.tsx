@@ -27,7 +27,7 @@ export default () => {
                 <TextInput style={styles.title} multiline={true}>
                     Pretty title
                 </TextInput>
-                <View style={expand ? styles.hidden : {}}>
+                <View style={expand ?  {} : styles.hidden}>
                     <MarkdownBlock />
                 </View>
             </View>
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         color: 'red'
     },
     section: {
-        flex: 1,
+        // flex: 1,
         flexDirection: 'row',
         //height: 200
     },
