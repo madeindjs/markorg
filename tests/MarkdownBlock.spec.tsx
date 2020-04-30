@@ -1,19 +1,19 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import MarkdownBlock from '../lib/MarkdownBlock';
+import BlockElement from '../lib/blockElement';
 
 
-describe('MarkdownBlock', () => {
+describe('BlockElement', () => {
 
     test('not parse no markdown test', () => {
-        const editor = renderer.create(<MarkdownBlock content="toto" />).toJSON();
+        const editor = renderer.create(<BlockElement content="toto" />).toJSON();
         expect(editor.children).toHaveLength(1);
     });
 
     describe('italic', () => {
         test('parse inline markdown test', () => {
             const md = `Hello *boi* !`;
-            const editor = renderer.create(<MarkdownBlock content={md} />).toJSON();
+            const editor = renderer.create(<BlockElement content={md} />).toJSON();
             expect(editor.children).toHaveLength(3);
             // console.log(editor)
             // expect(editor).toMatchSnapshot();
@@ -35,7 +35,7 @@ describe('MarkdownBlock', () => {
 
         test('parse multiples inline markdown test', () => {
             const md = `*Hello* *boi* !`;
-            const editor = renderer.create(<MarkdownBlock content={md} />).toJSON();
+            const editor = renderer.create(<BlockElement content={md} />).toJSON();
             expect(editor.children).toHaveLength(4);
 
             const part1 = editor.children[0];
@@ -60,7 +60,7 @@ describe('MarkdownBlock', () => {
         });
         test('parse multiples inline markdown test', () => {
             const md = `*Hello* *boi* !`;
-            const editor = renderer.create(<MarkdownBlock content={md} />).toJSON();
+            const editor = renderer.create(<BlockElement content={md} />).toJSON();
             expect(editor.children).toHaveLength(4);
 
             const part1 = editor.children[0];
@@ -88,7 +88,7 @@ describe('MarkdownBlock', () => {
     describe('title', () => {
         test('parse inline H1', () => {
             const md = '# Hello !';
-            const editor = renderer.create(<MarkdownBlock content={md} />).toJSON();
+            const editor = renderer.create(<BlockElement content={md} />).toJSON();
 
             expect(editor.children[0].type).toBe('Text');
             expect(editor.children[0].children[0]).toBe('# Hello !');
@@ -98,7 +98,7 @@ describe('MarkdownBlock', () => {
     describe('code', () => {
         test('parse inline markdown test', () => {
             const md = 'Hello `boi` !';
-            const editor = renderer.create(<MarkdownBlock content={md} />).toJSON();
+            const editor = renderer.create(<BlockElement content={md} />).toJSON();
             expect(editor.children).toHaveLength(3);
 
             const part1 = editor.children[0];
@@ -120,7 +120,7 @@ describe('MarkdownBlock', () => {
     describe('strong', () => {
         test('parse inline markdown test', () => {
             const md = `Hello **boi** !`;
-            const editor = renderer.create(<MarkdownBlock content={md} />).toJSON();
+            const editor = renderer.create(<BlockElement content={md} />).toJSON();
             expect(editor.children).toHaveLength(3);
 
             const part1 = editor.children[0];
@@ -140,7 +140,7 @@ describe('MarkdownBlock', () => {
 
         test('parse multiples inline markdown test', () => {
             const md = `**Hello** *boi* !`;
-            const editor = renderer.create(<MarkdownBlock content={md} />).toJSON();
+            const editor = renderer.create(<BlockElement content={md} />).toJSON();
             expect(editor.children).toHaveLength(4);
 
             const part1 = editor.children[0];

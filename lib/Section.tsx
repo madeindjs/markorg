@@ -1,7 +1,7 @@
 
 import React, { Fragment, useState } from 'react';
 import { StyleSheet, Button, TextInput, View } from 'react-native';
-import MarkdownBlock from './MarkdownBlock';
+import BlockElement from './blockElement';
 
 interface IProps {
     content: string;
@@ -28,7 +28,7 @@ export default () => {
                     Pretty title
                 </TextInput>
                 <View style={expand ?  {} : styles.hidden}>
-                    <MarkdownBlock />
+                    <BlockElement />
                 </View>
             </View>
             <Button onPress={toggle} title={expand ? "[+]" : "[-]"} />
