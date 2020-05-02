@@ -15,7 +15,7 @@ export default () => {
         }]);
     };
 
-    const onSectionChange = () => console.log('TODO: do some stuff')
+    const onSectionChange = (data: ISection) => console.log(`TODO: do some stuff ${data}`)
 
     console.log(sections)
 

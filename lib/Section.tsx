@@ -11,7 +11,7 @@ export interface ISection {
 }
 
 export interface ISectionProps extends ISection {
-    onChange: Function;
+    onChange: (data: ISection) => void;
 }
 
 export default (props: ISectionProps) => {
@@ -29,12 +29,12 @@ export default (props: ISectionProps) => {
 
     return (
         <View style={styles.section}>
-            <Button onPress={incrementLevel} title={"#".repeat(level) } />
+            <Button onPress={incrementLevel} title={"#".repeat(level)} />
             <View style={{ flex: 1, flexDirection: 'column' }}>
                 <TextInput style={styles.title} multiline={true} onChange={(e) => props.onChange(e)}>
                     Pretty title
                 </TextInput>
-                <View style={expand ?  {} : styles.hidden}>
+                <View style={expand ? {} : styles.hidden}>
                     <BlockElement />
                 </View>
             </View>
