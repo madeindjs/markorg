@@ -49,7 +49,7 @@ function parseContent(content: string): JSX.Element[] {
 
 
 export default (props: IProps) => {
-    const [content, setContent] = useState(props.content || "*Lorem* __Ipsum__ sir dolor amet.");
+    const [content, setContent] = useState(props.content ?? "*Lorem* __Ipsum__ sir dolor amet.");
     const elements = parseContent(content);
 
     return (

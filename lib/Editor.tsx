@@ -1,23 +1,25 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Button } from 'react-native';
-import Section, { ISection } from './Section';
+import Section, { ISection, ISectionProps } from './Section';
 
 
 export default () => {
-    const [sections, setSections] = useState<ISection[]>([]);
+    const [sections, setSections] = useState<ISectionProps[]>([]);
+    
+    const onSectionChange = (data: ISection) => console.log(`TODO: do some stuff ${JSON.stringify(data)}`)
 
     const addSection = () => {
         setSections([...sections, {
             level: 1,
-            title: "Hello",
-            content: 'azaz',
+            // title: "Hello",
+            // content: 'azaz',
             collapsed: false,
+            onChange: onSectionChange,
         }]);
     };
 
-    const onSectionChange = (data: ISection) => console.log(`TODO: do some stuff ${data}`)
 
-    console.log(sections)
+    // console.log(sections)
 
     // const lines = content.split('\n');
 
