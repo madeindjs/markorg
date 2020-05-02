@@ -6,31 +6,29 @@ import Section, { ISection, ISectionProps } from './Section';
 export default () => {
     const [sections, setSections] = useState<ISectionProps[]>([]);
     
-    const onSectionChange = (data: ISection) => console.log(`TODO: do some stuff ${JSON.stringify(data)}`)
+    const onSectionChange = (data: ISection) => {
+        const i = sections.findIndex(s => s.id === data.id);
+        sections[i] = { ...data, onChange: onSectionChange };
+        setSections(sections);
+        console.log(`Updated: ${JSON.stringify(data)}`);
+    };
 
     const addSection = () => {
+        const id = new Date().getTime();
+
         setSections([...sections, {
-            level: 1,
-            // title: "Hello",
-            // content: 'azaz',
+            id,
             collapsed: false,
             onChange: onSectionChange,
         }]);
     };
 
 
-    // console.log(sections)
-
-    // const lines = content.split('\n');
-
-    // const sections = [];
-
-    // for (let i; i> )
-
     return (
         <View style={styles.editor}>
             {sections.map((s, i) => <Section
                 key={i}
+                id={s.id}
                 title={s.title}
                 level={s.level}
                 content={s.content}

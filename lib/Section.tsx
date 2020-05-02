@@ -4,6 +4,7 @@ import { StyleSheet, Button, TextInput, View } from 'react-native';
 import BlockElement from './blockElement';
 
 export interface ISection {
+    id: number;
     level: number;
     title: string;
     content: string;
@@ -11,6 +12,7 @@ export interface ISection {
 }
 
 export interface ISectionProps {
+    id: number;
     level?: number;
     title?: string;
     content?: string;
@@ -21,8 +23,8 @@ export interface ISectionProps {
 export default (props: ISectionProps) => {
     const [collapsed, setCollapsed] = useState(props.collapsed ?? false);
     const [level, setLevel] = useState(props.level ?? 1);
-    const [title, setTitle] = useState(props.title ??  "TODO: add a title");
-    const [content, setContent] = useState(props.content ??  "*Lorem* __Ipsum__ sir dolor amet.");
+    const [title, setTitle] = useState(props.title ?? "TODO: add a title");
+    const [content, setContent] = useState(props.content ?? "*Lorem* __Ipsum__ sir dolor amet.");
 
     const toggle = () => setCollapsed(!collapsed);
 
@@ -31,7 +33,7 @@ export default (props: ISectionProps) => {
         setLevel(newLevel);
     }
 
-    const data: ISection = { level, title, collapsed, content }
+    const data: ISection = { id: props.id, level, title, collapsed, content };
 
     return (
         <View style={styles.section}>
