@@ -1,29 +1,23 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Button } from 'react-native';
-import Section from './Section';
+import Section, { ISection } from './Section';
 
-// function parseMarkdown(text: string, callback): Node[] {
-//     console.log('---------------------------------------')
-//     const ast = md(text);
-//     console.log(ast);
-//     callback(text);
-//     return ast;
-// }
-
-interface ISectionData {
-    level: number;
-    onChange: () => void
-}
 
 export default () => {
-    const [sections, setSections] = useState<ISectionData[]>([]);
+    const [sections, setSections] = useState<ISection[]>([]);
 
     const addSection = () => {
         setSections([...sections, {
             level: 1,
-            onChange: () => {}
+            title: "Hello",
+            content: 'azaz',
+            collapsed: false,
         }]);
-    }
+    };
+
+    const onSectionChange = () => console.log('TODO: do some stuff')
+
+    console.log(sections)
 
     // const lines = content.split('\n');
 
@@ -33,7 +27,14 @@ export default () => {
 
     return (
         <View style={styles.editor}>
-            {sections.map((e, i) => <Section key={i} />)}
+            {sections.map((s, i) => <Section
+                key={i}
+                title={s.title}
+                level={s.level}
+                content={s.content}
+                collapsed={s.collapsed}
+                onChange={onSectionChange}
+            />)}
             <Button title="add section" onPress={() => addSection()} />
         </View>
     );

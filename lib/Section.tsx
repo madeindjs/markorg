@@ -3,11 +3,18 @@ import React, { Fragment, useState } from 'react';
 import { StyleSheet, Button, TextInput, View } from 'react-native';
 import BlockElement from './blockElement';
 
-interface IProps {
+export interface ISection {
+    level: number;
+    title: string;
     content: string;
+    collapsed: boolean;
 }
 
-export default () => {
+export interface ISectionProps extends ISection {
+    onChange: Function;
+}
+
+export default (props: ISectionProps) => {
     const [expand, setExpand] = useState(true);
     const [level, setLevel] = useState(1);
 
@@ -24,7 +31,7 @@ export default () => {
         <View style={styles.section}>
             <Button onPress={incrementLevel} title={"#".repeat(level) } />
             <View style={{ flex: 1, flexDirection: 'column' }}>
-                <TextInput style={styles.title} multiline={true}>
+                <TextInput style={styles.title} multiline={true} onChange={(e) => props.onChange(e)}>
                     Pretty title
                 </TextInput>
                 <View style={expand ?  {} : styles.hidden}>
