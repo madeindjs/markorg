@@ -26,27 +26,48 @@ export default (props: ISectionProps) => {
     const [title, setTitle] = useState(props.title ?? "TODO: add a title");
     const [content, setContent] = useState(props.content ?? "*Lorem* __Ipsum__ sir dolor amet.");
 
-    const toggle = () => setCollapsed(!collapsed);
+    const data: ISection = { id: props.id, level, title, collapsed, content };
+
+    const toggleCollapse = () => {
+        data.collapsed = !collapsed;
+        props.onChange(data);
+        setCollapsed(!collapsed);
+    };
 
     const incrementLevel = () => {
         let newLevel = level > 6 ? 1 : level + 1;
+        data.level = newLevel;
+        props.onChange(data);
         setLevel(newLevel);
     }
 
-    const data: ISection = { id: props.id, level, title, collapsed, content };
+    const onTitleChanged = (newTitle) => {
+        data.title = newTitle
+        props.onChange(data);
+        setTitle(newTitle);
+    };
+
+    const onContentChanged = (newContent) => {
+        data.content = newContent;
+        props.onChange(data);
+        setContent(newContent);
+    };
 
     return (
         <View style={styles.section}>
             <Button onPress={incrementLevel} title={"#".repeat(level)} />
             <View style={{ flex: 1, flexDirection: 'column' }}>
-                <TextInput style={styles.title} multiline={true} onChange={() => props.onChange(data)}>
-                    {title}
-                </TextInput>
+                <TextInput
+                    style={styles.title}
+                    multiline={true}
+                    onChangeText={newTitle => onTitleChanged(newTitle)} >{title}</TextInput>
                 <View style={collapsed ? {} : styles.hidden}>
-                    <BlockElement content={content} />
+                    <BlockElement
+                        content={content}
+                        onChange={newContent => onContentChanged(newContent)} />
                 </View>
             </View>
-            <Button onPress={toggle} title={collapsed ? "[+]" : "[-]"} />
+            <Button onPress={toggleCollapse} title={collapsed ? "[+]" : "[-]"} />
         </View>
     );
 };

@@ -6,6 +6,7 @@ import md, { Node, Text as TextNode } from 'markdown-ast'
 
 interface IProps {
     content?: string;
+    onChange?: (content?: string) => void
 }
 
 function getElements(node: Node, index: number): JSX.Element {
@@ -52,8 +53,16 @@ export default (props: IProps) => {
     const [content, setContent] = useState(props.content ?? "*Lorem* __Ipsum__ sir dolor amet.");
     const elements = parseContent(content);
 
+    const onChange = text => {
+        setContent(text);
+        if (props.onChange) props.onChange(text);
+    };
+
     return (
-        <TextInput onChangeText={text => setContent(text)} multiline={true}>
+        <TextInput
+            onChangeText={text => onChange(text)}
+            multiline={true}
+        >
             {elements.map(element => (element))}
         </TextInput>
     );
