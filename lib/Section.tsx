@@ -1,6 +1,6 @@
 
-import React, { Fragment, useState } from 'react';
-import { StyleSheet, Button, TextInput, View, NativeSyntheticEvent, TextInputKeyPressEventData } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Button, Text, TextInput, View, NativeSyntheticEvent, TextInputKeyPressEventData, TouchableHighlight } from 'react-native';
 import BlockElement from './blockElement';
 
 export interface ISection {
@@ -65,21 +65,37 @@ export default (props: ISectionProps) => {
 
     return (
         <View style={styles.section}>
-            <Button onPress={incrementLevel} title={"#".repeat(level)} />
+            <TouchableHighlight
+                onPress={incrementLevel}
+                style={styles.beforeTitle}
+            >
+                <Text style={styles.beforeTitleText}>
+                    {'#'.repeat(level)}
+                </Text>
+            </TouchableHighlight>
             <View style={{ flex: 1, flexDirection: 'column' }}>
                 <TextInput
                     style={styles.title}
                     multiline={false}
                     onChangeText={newTitle => onTitleChanged(newTitle)}
                     onKeyPress={e => onTitleKeyPress(e)}
-                >{title}</TextInput>
+                >
+                    {title}
+                </TextInput>
                 <View style={collapsed ? {} : styles.hidden}>
                     <BlockElement
                         content={content}
                         onChange={newContent => onContentChanged(newContent)} />
                 </View>
             </View>
-            <Button onPress={toggleCollapse} title={collapsed ? "[+]" : "[-]"} />
+            <TouchableHighlight
+                onPress={toggleCollapse}
+                style={styles.beforeTitle}
+            >
+                <Text style={styles.beforeTitleText}>
+                    {collapsed ? "[-]" : "[+]"}
+                </Text>
+            </TouchableHighlight>
         </View>
     );
 };
@@ -89,8 +105,17 @@ const styles = StyleSheet.create({
     expandButton: {
         fontFamily: 'monospace'
     },
+    beforeTitle: {
+        padding: 10,
+        alignSelf: 'baseline'
+    },
+    beforeTitleText: {
+        color: 'red',
+        fontFamily: 'monospace'
+    },
     title: {
         paddingTop: 10,
+        marginBottom: 10,
         fontWeight: 'bold',
         color: 'red'
     },
