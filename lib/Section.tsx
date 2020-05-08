@@ -1,6 +1,6 @@
 
 import React, { Fragment, useState } from 'react';
-import { StyleSheet, Button, TextInput, View } from 'react-native';
+import { StyleSheet, Button, TextInput, View, NativeSyntheticEvent, TextInputKeyPressEventData } from 'react-native';
 import BlockElement from './blockElement';
 
 export interface ISection {
@@ -56,14 +56,23 @@ export default (props: ISectionProps) => {
         setContent(newContent);
     };
 
+    const onTitleKeyPress = (event: NativeSyntheticEvent<TextInputKeyPressEventData>) => {
+        console.log('key pressed')
+        if (event.nativeEvent.key !== "Enter") return;
+
+        console.log('enter pressed')
+    };
+
     return (
         <View style={styles.section}>
             <Button onPress={incrementLevel} title={"#".repeat(level)} />
             <View style={{ flex: 1, flexDirection: 'column' }}>
                 <TextInput
                     style={styles.title}
-                    multiline={true}
-                    onChangeText={newTitle => onTitleChanged(newTitle)} >{title}</TextInput>
+                    multiline={false}
+                    onChangeText={newTitle => onTitleChanged(newTitle)}
+                    onKeyPress={e => onTitleKeyPress(e)}
+                >{title}</TextInput>
                 <View style={collapsed ? {} : styles.hidden}>
                     <BlockElement
                         content={content}
