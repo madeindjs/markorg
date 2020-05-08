@@ -5,7 +5,7 @@ import Section, { ISection, ISectionProps } from './Section';
 
 export default () => {
     const [sections, setSections] = useState<ISectionProps[]>([]);
-    
+
     const onSectionChange = (data: ISection) => {
         const i = sections.findIndex(s => s.id === data.id);
         sections[i] = { ...data, onChange: onSectionChange };

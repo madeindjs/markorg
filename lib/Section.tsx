@@ -14,6 +14,7 @@ export interface ISection {
 export interface ISectionProps {
     id: number;
     level?: number;
+    maxLevel?: number;
     title?: string;
     content?: string;
     collapsed?: boolean;
@@ -28,6 +29,8 @@ export default (props: ISectionProps) => {
 
     const data: ISection = { id: props.id, level, title, collapsed, content };
 
+    const maxLevel = props.maxLevel || 6;
+
     const toggleCollapse = () => {
         data.collapsed = !collapsed;
         props.onChange(data);
@@ -35,7 +38,7 @@ export default (props: ISectionProps) => {
     };
 
     const incrementLevel = () => {
-        let newLevel = level > 6 ? 1 : level + 1;
+        let newLevel = level > maxLevel ? 1 : level + 1;
         data.level = newLevel;
         props.onChange(data);
         setLevel(newLevel);
